@@ -1,9 +1,20 @@
 const express = require('express')
-const app = express()
 const exphbs = require('express-handlebars')
+const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+const restaurantList = require('./restaurant.json')
+const app = express()
+
 const hostname = `127.0.0.1`
 const port = 3000
-const restaurantList = require('./restaurant.json')
+
+mongoose.connect('mongodb://localhost/my-restaurant', {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+})
+const db = mongoose.connection
+db.on('error', () => console.error('connection error!'))
+db.once('open', () => console.log('database connected!'))
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
