@@ -10,7 +10,7 @@
 		"seed": "node models/seeds/restaurantSeeder.js"
 	},
 	"keywords": [],
-	"author": "",
+	"author": "Tony Chung",
 	"license": "ISC",
 	"dependencies": {
 		"body-parser": "^1.19.0",
