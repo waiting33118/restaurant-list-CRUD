@@ -2,9 +2,14 @@
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-10 mx-auto">
-      <a href="/">
-        <i class="fas fa-long-arrow-alt-left mr-2"></i>
-        Back to HomePage</a>
+      <div class="control d-flex justify-content-between">
+        <a href="/">
+          <i class="fas fa-long-arrow-alt-left mr-2"></i>
+          Back to HomePage</a>
+        <a href="/restaurants/{{item._id}}/edit">
+          <i class="far fa-edit" style="font-size:2rem;"></i>
+        </a>
+      </div>
       <p class="mb-1 mt-4">
         <span class="text-secondary">
           <i class="fas fa-utensils pr-2"></i>
