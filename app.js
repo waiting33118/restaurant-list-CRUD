@@ -101,6 +101,15 @@ app.post('/restaurants/:_id/edit', (req, res) => {
 		.then(res.redirect(`/restaurants/${id}`))
 })
 
+//接收刪除餐廳表單
+app.post('/restaurants/:_id/delete', (req, res) => {
+	const id = req.params._id
+	Restaurant.findById(id)
+		.then((item) => item.remove())
+		.then(res.redirect('/'))
+		.catch((err) => console.log(err))
+})
+
 app.listen(port, hostname, () => {
 	console.log(`The Server is running on http://${hostname}:${port}`)
 })
