@@ -30,10 +30,18 @@
               <div class="restaurant-category mb-1">
                 <i class="fas fa-utensils pr-2"></i> {{this.category}}
               </div>
-              <span class="badge badge-pill badge-danger font-weight-normal py-1 mt-3">
-                {{this.rating}}
-                <i class="fas fa-star fa-xs"></i>
-              </span>
+              <div class="d-flex flex-nowrap justify-content-between">
+                <div class="rate">
+                  <span class="badge badge-pill badge-danger font-weight-normal py-1">
+                    {{this.rating}}
+                    <i class="fas fa-star fa-xs"></i>
+                  </span>
+                </div>
+                <div class="">
+                  <a href="/restaurants/{{this._id}}/edit"><i class="far fa-edit"></i></a>
+                  <a href="/restaurants/{{this._id}}/delete"><i class="far fa-trash-alt ml-2 ml-md-3 mr-md-3"></i></a>
+                </div>
+              </div>
             </div>
           </div>
         </a>
