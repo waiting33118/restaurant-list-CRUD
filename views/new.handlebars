@@ -1,0 +1,49 @@
+<div class="container my-5">
+  <h2 class="text-center mb-5">新增餐廳明細</h2>
+  <form action="/new" method="POST">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputName">餐廳名稱<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="inputName" name="name" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputName_en">餐廳英文名稱<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="inputName_en" name="name_en" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputCategory">餐廳種類<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="inputCategory" name="category" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputImage">餐廳圖片連結</label>
+        <input type="text" class="form-control" id="inputImage" name="image">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputLocation">餐廳地址<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="inputLocation" name="location" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPhone">餐廳連絡電話<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="inputPhone" name="phone" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputGoogle_map">餐廳GoogleMap<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="inputGoogle_map" name="google_map" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputGoogle_map_iframe">餐廳GoogleMap Iframe連結<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="inputGoogle_map_iframe" name="google_map_iframe" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputRating">餐廳評分<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="inputRating" name="rating" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputDescription">餐廳說明<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="inputDescription" name="description" required>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-outline-success btn-block mt-5">建立</button>
+  </form>
+
+</div>
