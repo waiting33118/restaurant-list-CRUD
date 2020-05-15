@@ -2,7 +2,7 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const restaurantList = require('./restaurant.json')
+const RestaurantList = require('./models/restaurant')
 const app = express()
 
 const hostname = `127.0.0.1`
@@ -18,27 +18,53 @@ db.once('open', () => console.log('database connected!'))
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('public'))
 
+//渲染主頁面
 app.get('/', (req, res) => {
-	res.render('home', { restaurant: restaurantList.results })
+	RestaurantList.find()
+		.lean()
+		.then((item) => res.render('home', { item }))
+		.catch((err) => console.error(err))
 })
 
-app.get('/restaurants/:id', (req, res) => {
-	const restaurant = restaurantList.results.find(
-		(item) => item.id.toString() === req.params.id
-	)
-	res.render('show', { restaurant })
+//進入單一頁面(detail)
+app.get('/restaurants/:_id', (req, res) => {
+	const id = req.params._id
+	RestaurantList.findById(id)
+		.lean()
+		.then((item) => res.render('show', { item }))
+		.catch((err) => console.error(err))
 })
 
+//搜尋關鍵字
 app.get('/search', (req, res) => {
-	const keyword = req.query.keyword.toLowerCase()
-	const restaurant = restaurantList.results.filter(
-		(item) =>
-			item.name.toLowerCase().includes(keyword) ||
-			item.category.includes(keyword)
-	)
-	res.render('home', { restaurant, keyword: req.query.keyword })
+	const keyword = req.query.keyword
+	RestaurantList.find({
+		$or: [
+			{ name: { $regex: `${keyword}`, $options: 'i' } },
+			{ category: { $regex: `${keyword}`, $options: 'i' } },
+		],
+	})
+		.lean()
+		.then((item) => res.render('home', { item, keyword: req.query.keyword }))
+		.catch((err) => console.error(err))
+})
+
+//新增餐廳
+app.get('/new', (req, res) => {
+	res.render('new')
+})
+
+app.post('/new', (req, res) => {
+	if (!req.body.image) {
+		req.body.image = `https://image.freepik.com/free-vector/elegant-restaurant-composition_23-2147855078.jpg`
+	}
+	const info = req.body
+	RestaurantList.create(info)
+		.then(res.redirect('/'))
+		.catch((err) => console.log(err))
 })
 
 app.listen(port, hostname, () => {
