@@ -1,6 +1,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 const Restaurant = require('./models/restaurant')
 const app = express()
 require('./config/mongoose')
@@ -10,12 +11,14 @@ const port = 3000
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 app.use(express.static('public'))
 
 //渲染主頁面
 app.get('/', (req, res) => {
 	Restaurant.find()
 		.lean()
+		.sort('_id')
 		.then((item) => res.render('home', { item }))
 		.catch((err) => console.error(err))
 })
