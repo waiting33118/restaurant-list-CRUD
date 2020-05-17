@@ -46,6 +46,7 @@ _資料庫預設位置: localhost/my-restaurant_
 - Express V4.17.1 -框架
 - Express-handlebars V4.0.3 -模板引擎
 - Body-Parser V1.19.0 -解析 POST 資料
+- Method-Override V3.0.0 改寫 POST Method
 - Mongoose V5.9.14 -mongoDB ODM
 
 ## 產品功能(User Story)
@@ -55,6 +56,7 @@ _資料庫預設位置: localhost/my-restaurant_
 - 使用者可以利用**餐廳名稱**或**類別**查詢特定店家
 - 使用者可以修改餐廳資訊
 - 使用者可以刪除餐廳
+- 使用者可以依照**評價**或**類別**進行排序
 
 ## Contributor
 
