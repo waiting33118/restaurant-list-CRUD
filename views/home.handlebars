@@ -18,6 +18,19 @@
 
 <!-- 餐廳列表 -->
 <div class="container mt-5">
+  <div class="d-flex justify-content-end">
+    <div class="dropdown mb-2">
+      <button class="btn btn-sm btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        排序方式
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/sort/_id">預設排列</a>
+        <a class="dropdown-item" href="/sort/-rating">好評度</a>
+        <a class="dropdown-item" href="/sort/category">類別</a>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">

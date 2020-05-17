@@ -11,6 +11,18 @@ router.get('/', (req, res) => {
 		.catch((err) => console.error(err))
 })
 
+// 依照排序顯示
+router.get('/sort/:by', (req, res) => {
+	const sortBy = req.params.by
+	Restaurant.find()
+		.lean()
+		.sort(sortBy)
+		.then((item) => {
+			res.render('home', { item })
+		})
+		.catch((err) => console.error(err))
+})
+
 //搜尋關鍵字
 router.get('/search', (req, res) => {
 	const keyword = req.query.keyword
