@@ -1,4 +1,8 @@
 <div class="container my-5">
+  <a href="/">
+    <i class="fas fa-long-arrow-alt-left"></i>
+    Back to HomePage
+  </a>
   <h2 class="text-center mb-5">新增餐廳明細</h2>
   <form action="/new" method="POST">
     <div class="form-row">
@@ -16,7 +20,7 @@
       </div>
       <div class="form-group col-md-6">
         <label for="inputImage">餐廳圖片連結</label>
-        <input type="text" class="form-control" placeholder="若無圖片則使用預設圖片..." id="inputImage" name="image">
+        <input type="url" class="form-control" placeholder="若無圖片則使用預設圖片..." id="inputImage" name="image">
       </div>
       <div class="form-group col-md-6">
         <label for="inputLocation">餐廳地址<span class="text-danger">*</span></label>
