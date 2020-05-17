@@ -1,10 +1,11 @@
 const express = require('express')
+const routes = require('./routes')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const Restaurant = require('./models/restaurant')
-const app = express()
 require('./config/mongoose')
+const app = express()
 const hostname = `127.0.0.1`
 const port = 3000
 
@@ -13,6 +14,7 @@ app.set('view engine', 'handlebars')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(express.static('public'))
+app.use(routes)
 
 //渲染主頁面
 app.get('/', (req, res) => {
@@ -72,7 +74,7 @@ app.post('/new', (req, res) => {
 })
 
 //接收修改餐廳表單
-app.post('/restaurants/:_id/edit', (req, res) => {
+app.put('/restaurants/:_id', (req, res) => {
 	const id = req.params._id
 	const info = req.body
 	if (!info.image) {
@@ -96,7 +98,7 @@ app.post('/restaurants/:_id/edit', (req, res) => {
 })
 
 //接收刪除餐廳表單
-app.post('/restaurants/:_id/delete', (req, res) => {
+app.delete('/restaurants/:_id', (req, res) => {
 	const id = req.params._id
 	Restaurant.findById(id)
 		.then((item) => item.remove())
