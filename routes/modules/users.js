@@ -1,16 +1,20 @@
 const express = require('express')
 const passport = require('passport')
+const bcrypt = require('bcryptjs')
 const router = express.Router()
 const User = require('../../models/user')
 
+// 登入介面
 router.get('/login', (req, res) => {
   res.render('login')
 })
 
+// 註冊介面
 router.get('/register', (req, res) => {
   res.render('register')
 })
 
+// 登入資料form
 router.post(
   '/login',
   passport.authenticate('local', {
@@ -19,6 +23,7 @@ router.post(
   })
 )
 
+// 註冊資料form
 router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
   const errors = []
@@ -39,11 +44,16 @@ router.post('/register', (req, res) => {
         email
       })
     }
-    User.create({
-      name,
-      email,
-      password
-    })
+    bcrypt
+      .genSalt(10)
+      .then((salt) => bcrypt.hash(password, salt))
+      .then((hash) => {
+        return User.create({
+          name,
+          email,
+          password: hash
+        })
+      })
       .then(() => {
         res.redirect('/')
       })
