@@ -1,6 +1,7 @@
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
+const bcrypt = require('bcryptjs')
 const db = require('../../config/mongoose')
 const User = require('../user')
 const Restaurant = require('../restaurant')
@@ -8,11 +9,16 @@ const userInfo = require('../seeds/info.json').users
 
 db.once('open', () => {
   console.log('Create User1')
-  return User.create({
-    name: userInfo[0].name,
-    email: userInfo[0].email,
-    password: userInfo[0].password
-  })
+  bcrypt
+    .genSalt(10)
+    .then((salt) => bcrypt.hash(userInfo[0].password, salt))
+    .then((hash) => {
+      return User.create({
+        name: userInfo[0].name,
+        email: userInfo[0].email,
+        password: hash
+      }).catch((err) => console.log(err))
+    })
     .then((user) => {
       const userId = user._id
       return Promise.all(
@@ -33,13 +39,17 @@ db.once('open', () => {
         )
       )
     })
-    .then(() => {
-      console.log('Create User2')
+
+  console.log('Create User2')
+  bcrypt
+    .genSalt(10)
+    .then((salt) => bcrypt.hash(userInfo[1].password, salt))
+    .then((hash) => {
       return User.create({
         name: userInfo[1].name,
         email: userInfo[1].email,
-        password: userInfo[1].password
-      })
+        password: hash
+      }).catch((err) => console.log(err))
     })
     .then((user) => {
       const userId = user._id
