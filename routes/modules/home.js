@@ -4,7 +4,8 @@ const Restaurant = require('../../models/restaurant')
 
 // 渲染主頁面
 router.get('/', (req, res) => {
-  Restaurant.find()
+  const userId = req.user._id
+  Restaurant.find({ userId })
     .lean()
     .sort('_id')
     .then((item) => res.render('home', { item }))
@@ -13,8 +14,9 @@ router.get('/', (req, res) => {
 
 // 依照排序顯示
 router.get('/sort/:by', (req, res) => {
+  const userId = req.user._id
   const sortBy = req.params.by
-  Restaurant.find()
+  Restaurant.find({ userId })
     .lean()
     .sort(sortBy)
     .then((item) => {
@@ -25,8 +27,10 @@ router.get('/sort/:by', (req, res) => {
 
 // 搜尋關鍵字
 router.get('/search', (req, res) => {
+  const userId = req.user._id
   const keyword = req.query.keyword
   Restaurant.find({
+    userId,
     $or: [
       { name: { $regex: `${keyword}`, $options: 'i' } },
       { category: { $regex: `${keyword}`, $options: 'i' } }
