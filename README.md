@@ -33,7 +33,13 @@ npm install
 npm run seed
 ```
 
-#### 3.使用 nodemon 啟動伺服器
+#### 3.修改您的環境變數
+
+```
+請將.env.example更改檔名為.env，並且填入屬於您的facebook ID & facebook Secret
+```
+
+#### 4.使用 nodemon 啟動伺服器
 
 ```
 npm run dev
