@@ -55,7 +55,8 @@
                   <a href="/restaurants/{{this._id}}/edit">
                     <i class="far fa-edit"></i>
                   </a>
-                  <form action="/restaurants/{{this._id}}?_method=delete" method="post">
+                  <form action="/restaurants/{{this._id}}?_method=delete" method="post"
+                    onsubmit="return confirmDelete()">
                     <button type="submit" class="btn btn-link m-0 p-0">
                       <i class="far fa-trash-alt ml-3 ml-md-3 mr-md-3"></i>
                     </button>
